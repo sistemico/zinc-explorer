@@ -1,0 +1,56 @@
+:root {
+  --backgroud-color: #151923;
+  --theme-color: #00dc6b;
+  --text-light-color: #808ba8;
+}
+
+html {
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+body {
+  margin: 0;
+
+  font-family: 'IBM Plex Sans', sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
+
+  background: white;
+  color: var(--backgroud-color);
+}
+
+*,
+:after,
+:before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+a {
+  color: #00ce90;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+h3,
+p {
+  font-size: 16px;
+  line-height: 22px;
+}
