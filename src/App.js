@@ -1,12 +1,14 @@
 import React from 'react'
 import { ApolloProvider } from 'react-apollo-hooks'
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
 import client from './client'
 import Logo from './components/Logo'
 
-import Registry from './Registry'
+import Address from './fragments/Address'
+import Registry from './fragments/Registry'
+import Transaction from './fragments/Transaction'
 
 const App = () => (
   <ApolloProvider client={client}>
@@ -30,8 +32,9 @@ const App = () => (
               anybody else including the Zinc team.
             </h2>
             <Switch>
+              <Route path="/tx/:hash" component={Transaction} />
+              <Route path="/:address" component={Address} />
               <Route path="/" exact={true} component={Registry} />
-              <Redirect to="/" />
             </Switch>
           </Container>
         </Content>

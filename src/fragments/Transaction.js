@@ -1,15 +1,15 @@
 import React from 'react'
 import { useQuery } from 'react-apollo-hooks'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import gql from 'graphql-tag'
-import styled from 'styled-components'
 
-import Table from './components/Table'
-import Timestamp from './components/formatters/Timestamp'
+import Fragment from '../components/Fragment'
+import Table from '../components/Table'
+import Timestamp from '../components/formatters/Timestamp'
 
-const listClaims = gql`
-  {
-    claimSets(first: 100, orderBy: updatedAt, orderDirection: desc) {
+const getClaimsByTransactionQuery = gql`
+  query getClaimsByTransaction($hash: String!) {
+    claimSets(first: 100, orderBy: updatedAt, orderDirection: desc, where: { transaction: $hash }) {
       id
       subject
       issuer
@@ -21,16 +21,22 @@ const listClaims = gql`
   }
 `
 
-const Registry = () => {
-  const { loading, error, data } = useQuery(listClaims)
+const Transaction = ({ match }) => {
+  const { loading, error, data: { claimSets: data } = {} } = useQuery(getClaimsByTransactionQuery, {
+    variables: { hash: match.params.hash },
+  })
 
-  if (loading || error) {
-    return null
+  if (loading) {
+    return <h3>Loading data...</h3>
+  }
+
+  if (error) {
+    return <Redirect to="/" />
   }
 
   return (
-    <Container>
-      <h3>Registry: 0x0D416ffd6964Fd122ee13d9a229fd3bb08B2deEc</h3>
+    <Fragment>
+      <h3>Transaction Id: {match.params.hash}</h3>
 
       <Table>
         <table>
@@ -45,7 +51,7 @@ const Registry = () => {
             </tr>
           </thead>
           <tbody>
-            {data.claimSets.map(({ id, data: fingerprint, issuer, subject, transaction, updatedAt: timestamp }) => (
+            {data.map(({ id, data: fingerprint, issuer, subject, transaction, updatedAt: timestamp }) => (
               <tr key={id}>
                 <td>
                   <span>Reference</span>
@@ -67,32 +73,21 @@ const Registry = () => {
                   <Timestamp value={timestamp} />
                 </td>
                 <td>
-                  <Link to={`/tx/${transaction}`}>
+                  {transaction === match.params.hash ? (
                     <span>{transaction}</span>
-                  </Link>
+                  ) : (
+                    <Link to={`/tx/${transaction}`}>
+                      <span>{transaction}</span>
+                    </Link>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </Table>
-    </Container>
+    </Fragment>
   )
 }
 
-const Container = styled.div`
-  margin-bottom: 2rem;
-
-  table {
-    thead {
-      th {
-        &:nth-child(1),
-        &:nth-child(5) {
-          width: 10%;
-        }
-      }
-    }
-  }
-`
-
-export default Registry
+export default Transaction
