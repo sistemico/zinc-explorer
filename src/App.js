@@ -43,11 +43,11 @@ const App = () => (
         <span>
           Made with <b>❤</b> by&nbsp;
         </span>
-        <a href="https://github.com/sistemico/zinc-explorer" target="_blank">
+        <a href="https://github.com/sistemico/zinc-explorer" target="_blank" rel="noopener noreferrer">
           sistemico
         </a>
         <span>&nbsp;using&nbsp;</span>
-        <a href="https://thegraph.com/" target="_blank">
+        <a href="https://thegraph.com/" target="_blank" rel="noopener noreferrer">
           The Graph
         </a>
       </Footer>
