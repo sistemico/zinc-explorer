@@ -39,6 +39,18 @@ const App = () => (
           </Container>
         </Content>
       </Wrapper>
+      <Footer>
+        <span>
+          Made with <b>❤</b> by&nbsp;
+        </span>
+        <a href="https://github.com/sistemico/zinc-explorer" target="_blank">
+          sistemico
+        </a>
+        <span>&nbsp;using&nbsp;</span>
+        <a href="https://thegraph.com/" target="_blank">
+          The Graph
+        </a>
+      </Footer>
     </Router>
   </ApolloProvider>
 )
@@ -115,6 +127,19 @@ const Content = styled.section`
   h3 {
     margin: 1.8rem 0 1.5rem;
     color: var(--text-light-color);
+  }
+`
+
+const Footer = styled.footer`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+  font-size: 90%;
+
+  b {
+    color: var(--link-color);
   }
 `
 

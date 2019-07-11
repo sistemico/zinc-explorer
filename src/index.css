@@ -1,6 +1,7 @@
 :root {
   --backgroud-color: #151923;
   --theme-color: #00dc6b;
+  --link-color: #00ce90;
   --text-light-color: #808ba8;
 }
 
@@ -30,7 +31,7 @@ body {
 }
 
 a {
-  color: #00ce90;
+  color: var(--link-color);
 }
 
 h1,

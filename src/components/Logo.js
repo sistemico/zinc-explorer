@@ -16,7 +16,7 @@ const Logo = () => (
 const StyledLink = styled(Link)`
   display: inline-block;
   flex: 0 0 auto;
-  fill: #00ce90;
+  fill: var(--link-color);
   margin: 0;
 `
 
